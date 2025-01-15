@@ -49,3 +49,4 @@ func InitSQL(host string, port int, user, password, name string) error {
 func SQL() *gorm.DB {
 	return sql
 }
+
