@@ -16,7 +16,7 @@ var sql *gorm.DB
 func InitSQL(host string, port int, user, password, name string) error {
 	m, err := gorm.Open(mysql.New(mysql.Config{
 		DSN: fmt.Sprintf(
-			"%v:%v@tcp(%v:%v)/%v?charset=utf8&parseTime=True&loc=Local",
+			"%v:%v@tcp(%v:%v)/%v?charset=utf8&parseTime=True&loc=Local&tls=true",
 			user, password, host, port, name,
 		), // data source name
 		DefaultStringSize:         256,   // default size for string fields
@@ -49,4 +49,3 @@ func InitSQL(host string, port int, user, password, name string) error {
 func SQL() *gorm.DB {
 	return sql
 }
-
