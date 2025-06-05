@@ -7,8 +7,8 @@ import (
 
 	// "strings"
 
-	"github.com/africhild/common/pkg/injection"
-	"github.com/africhild/common/pkg/util"
+	"github.com/QubelyLabs/bedrock/pkg/injection"
+	"github.com/QubelyLabs/bedrock/pkg/util"
 	"github.com/gin-gonic/gin"
 
 	// "github.com/go-playground/locales/en"
@@ -74,10 +74,11 @@ func (ctrl *BaseController) Validate(c *gin.Context, payload any) (any, bool) {
 	}
 	validate = validator.New()
 	if err := validate.Struct(payload); err != nil {
+		fmt.Println("error", err)
 		return err, false
 	} else {
-	fmt.Println("payload", payload)
-	return nil, true
+		fmt.Println("payload", payload)
+		return nil, true
 	}
 }
 
