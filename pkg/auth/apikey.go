@@ -32,28 +32,16 @@ type APIKeyAuth struct {
 //     return nil
 // }
 
-func (a *APIKeyAuth) ApplyAuth(req *http.Request) error {
-    fmt.Printf("[DEBUG] ApplyAuth - Key: %s, Field: %s, InHeader: %v\n", a.Key, a.Field, a.InHeader)
-    
+func (a *APIKeyAuth) ApplyAuth(req *http.Request) error {    
     if a.Key == "" || a.Field == "" {
         return fmt.Errorf("missing API key or field name")
     }
-
     if a.InHeader {
         req.Header.Set(a.Field, a.Key)
-        fmt.Printf("[DEBUG] Set header - %s: %s\n", a.Field, a.Key)
     } else {
         q := req.URL.Query()
         q.Set(a.Field, a.Key)
         req.URL.RawQuery = q.Encode()
-        fmt.Printf("[DEBUG] Set query parameter - %s: %s\n", a.Field, a.Key)
     }
-
-    // Print all headers for debugging
-    fmt.Printf("[DEBUG] All headers after ApplyAuth:\n")
-    for k, v := range req.Header {
-        fmt.Printf("[DEBUG] %s: %v\n", k, v)
-    }
-
     return nil
 }

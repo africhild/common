@@ -75,6 +75,7 @@ func (h *HTTPClient) Post(ctx context.Context,
 	}
 
 	// Make the request, get the response body
+	fmt.Println("headers: ", fullURL, reqBody)
 	res, body, err := h.httpPost(ctx, fullURL, headers, reqBody) //nolint:bodyclose
 	if err != nil {
 		return nil, nil, err
